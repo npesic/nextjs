@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<head>
+    <link id="style-lit-nav" rel="stylesheet" type="text/css" href="next.css">
+    <link id="style-global" rel="stylesheet" type="text/css" href="next.css">
+    <script src="components/lit-nav.js" defer></script>
+    <script>
+    if (navigator.storage && navigator.storage.persist)
+        navigator.storage.persist().then(function(persistent) {
+        if (persistent)
+            document.getElementById("storage-type").innerHTML = "persisted storage";
+        else
+            document.getElementById("storage-type").innerHTML = "non-persisted storage";
+        });
+    </script>
+    <title>meow-meow</title>
+</head>
+<body>
+
+    <div>
+        <lit-nav></lit-nav>
+
+        <div class="hero">
+          <h1 class="title">Welcome to meow-meow!</h1>
+          <p class="description">
+            How you doing?
+          </p>
+
+          <p class="row">
+                You're using: <span id="storage-type"></span>
+            </p>
+
+          <p class="row">
+            You're currently using <span id="storage-usage">
+            </span> of your estimate <span id="storage-quota">
+                </span> available storage.
+          </p>
+            <script>
+                navigator.storage.estimate().then(function(estimate) {
+                    document.getElementById("storage-usage").innerHTML =
+                    estimate.usage.toFixed(2);
+                    document.getElementById("storage-quota").innerHTML =
+                    estimate.quota.toFixed(2);
+                });
+            </script>
+
+          <div class='row'>
+
+            <a class="card" href='name-device.html'>
+                <h3>Name Device &rarr;</h3>
+                <p>Give a meaningful name for your device</p>
+            </a>
+
+            <a class="card" href='pair-device.html' style="visibility: hidden">
+                <h3>Pair Device &rarr;</h3>
+                <p>Add a backup device as identity keeper</p>
+            </a>
+
+            <a href='auth.html' class="card" style="visibility: hidden">
+                <h3>User Auth &rarr;</h3>
+                <p>Authhenticate</p>
+            </a>
+          </div>
+        </div>
+        <div id="like-component"></div>
+</body>
+</html>
